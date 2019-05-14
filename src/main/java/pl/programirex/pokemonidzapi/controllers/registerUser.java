@@ -12,6 +12,6 @@ public class registerUser {
     @RequestMapping(method = RequestMethod.GET, value = "/register")
     @ResponseBody
     public User registerUser(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password, @RequestParam(name = "email") String email) {
-        return new User(login, password, email);
+        return new User(login, password, email, (long) 2);
     }
 }

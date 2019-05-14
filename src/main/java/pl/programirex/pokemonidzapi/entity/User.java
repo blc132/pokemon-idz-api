@@ -52,6 +52,24 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    public User (String login, String password, String email, Long id) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.id = id;
+    }
+
+    public User (String login, String password, String email, String firstName, String lastName, int wins, int loses, Long id) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.wins = wins;
+        this.loses = loses;
+        this.id = id;
+    }
+
     public User () {}
 
     @Override
