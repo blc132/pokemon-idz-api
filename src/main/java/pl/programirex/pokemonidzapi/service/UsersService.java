@@ -7,22 +7,13 @@ import pl.programirex.pokemonidzapi.entity.User;
 import pl.programirex.pokemonidzapi.repository.UsersRepository;
 
 import javax.annotation.PostConstruct;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-@Service
-public class UsersService {
-
-    @Autowired
-    private UsersRepository usersRepository;
-
-
-    @PostConstruct
-    public void addFirstUser() {
-        var user = new User();
-
-        user.setLogin("admin");
-        user.setPassword("admin");
-
-        usersRepository.save(user);
-    }
-
+public interface UsersService {
+    public abstract void createUser(User user);
+    public abstract void deleteUser(String id);
+    public abstract Collection<User> getUsers();
 }
+

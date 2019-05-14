@@ -46,18 +46,34 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    public User (String login, String password, String email) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+
+    public User () {}
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
 
-    @Override
-    public String getPassword() {
-        return getPassword();
+    //@Override
+    //public String getPassword() {
+    //    return getPassword();
+    //}
+
+    public String getId(){
+        return id.toString();
     }
 
     @Override
     public String getUsername() { return getLogin(); }
+
+    private String getLogin() {
+        return this.login;
+    }
 
     //uproszczenie, nie robimy tego
     @Override
