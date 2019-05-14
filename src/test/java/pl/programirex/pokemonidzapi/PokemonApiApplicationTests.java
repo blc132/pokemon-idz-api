@@ -1,4 +1,4 @@
-package pl.programirex.pokemonapi;
+package pl.programirex.pokemonidzapi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
