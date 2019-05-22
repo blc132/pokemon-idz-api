@@ -13,7 +13,7 @@ import java.util.Map;
 @Service
 public class UsersServiceImpl implements UsersService {
 
-    private static Map<String, User> userRepo = new HashMap<>();
+    private static Map<Long, User> userRepo = new HashMap<Long, User>();
     @Autowired
     private UsersRepository usersRepository;
 

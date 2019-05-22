@@ -6,6 +6,4 @@ import pl.programirex.pokemonidzapi.entity.User;
 
 @Repository
 public interface UsersRepository extends JpaRepository<User, Long> {
-
-    User findOneByLogin(String username);
 }

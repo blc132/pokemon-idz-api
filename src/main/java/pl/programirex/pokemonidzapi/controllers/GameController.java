@@ -5,27 +5,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.bind.annotation.*;
 import pl.programirex.pokemonidzapi.entity.User;
-import pl.programirex.pokemonidzapi.service.UsersService;
+import pl.programirex.pokemonidzapi.repository.UsersRepository;
+//import pl.programirex.pokemonidzapi.service.UsersService;
 
 import java.util.ArrayList;
 
 @Controller
 @RequestMapping(value = "/game")
 public class GameController {
+//    @Autowired
+//    UsersService usersService;
+
     @Autowired
-    UsersService usersService;
+    UsersRepository usersRepository;
 
     ArrayList<User> usersList = new ArrayList<User>();
 
     GameController()
     {
-        usersList.add(new User("TestUser1", "12345678", "mail@mail.mail", "Jan", "Kowalski", 19, 7, (long) 2));
+        usersList.add(new User("TestUser1", "test", "test@test.pl", "Jan", "Kowalski", 19, 7, (long) 2));
         usersList.add(new User("TestUser2", "haslohaslo", "email@email.email", "Anna", "Nowak", 3, 15, (long) 1));
     }
 
@@ -64,9 +64,10 @@ public class GameController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/login")
     @ResponseBody
-    public ResponseEntity<User> login(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password) {
+    public ResponseEntity<User> login(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
+//        public ResponseEntity<User> login(@RequestBody LoginDto loginDto) {
         User userLogged = usersList.stream()
-                .filter(user -> login.equals(user.getUsername()) && password.equals(user.getPassword()))
+                .filter(user -> email.equals(user.getEmail()) && password.equals(user.getPassword()))
                 .findAny()
                 .orElse(null);
 

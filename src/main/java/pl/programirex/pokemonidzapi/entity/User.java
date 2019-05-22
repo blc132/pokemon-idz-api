@@ -1,6 +1,8 @@
 package pl.programirex.pokemonidzapi.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Data
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -43,7 +45,7 @@ public class User implements UserDetails {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    @Column(name = "password")
+    @Column(name = "pwd")
     private String password;
 
     public User (String login, String password, String email) {
@@ -72,47 +74,47 @@ public class User implements UserDetails {
 
     public User () {}
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    //@Override
-    //public String getPassword() {
-    //    return getPassword();
-    //}
-
-    public String getId(){
-        return id.toString();
-    }
-
-    @Override
-    public String getUsername() { return getLogin(); }
-
-    private String getLogin() {
-        return this.login;
-    }
-
-    //uproszczenie, nie robimy tego
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    //uproszczenie, nie robimy tego
-    @Override
-    public boolean isAccountNonLocked() {
-        return true ;
-    }
-
-    //uproszczenie, nie robimy tego
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return null;
+//    }
+//
+//    //@Override
+//    //public String getPassword() {
+//    //    return getPassword();
+//    //}
+//
+//    public String getId(){
+//        return id.toString();
+//    }
+//
+//    @Override
+//    public String getUsername() { return getLogin(); }
+//
+//    private String getLogin() {
+//        return this.login;
+//    }
+//
+//    //uproszczenie, nie robimy tego
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    //uproszczenie, nie robimy tego
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true ;
+//    }
+//
+//    //uproszczenie, nie robimy tego
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
 }
