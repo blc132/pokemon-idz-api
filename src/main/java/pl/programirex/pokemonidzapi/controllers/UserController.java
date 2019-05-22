@@ -1,19 +1,15 @@
 package pl.programirex.pokemonidzapi.controllers;
 
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
+import pl.programirex.pokemonidzapi.dto.LoginDto;
 import pl.programirex.pokemonidzapi.dto.UserDto;
 import pl.programirex.pokemonidzapi.entity.User;
-import pl.programirex.pokemonidzapi.service.UserService;
+import pl.programirex.pokemonidzapi.service.UserServiceImpl;
 
 import javax.validation.Valid;
 
@@ -22,7 +18,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/register")
     @ResponseBody
@@ -36,6 +32,20 @@ public class UserController {
         }
         return new ResponseEntity<>(registered, HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/login")
+    @ResponseBody
+    public ResponseEntity login(@Valid LoginDto loginDto, BindingResult result) {
+        User logged = new User();
+        if (!result.hasErrors()) {
+            logged = userService.login(loginDto);
+        }
+        if (logged == null || logged.getId() == null) {
+            return new ResponseEntity<>("Nie udało się zalogować!", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(logged, HttpStatus.OK);
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/test")
     public ResponseEntity<String> test()

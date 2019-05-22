@@ -8,15 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.programirex.pokemonidzapi.entity.User;
 import pl.programirex.pokemonidzapi.repository.UserRepository;
-//import pl.programirex.pokemonidzapi.service.IUserService;
+//import pl.programirex.pokemonidzapi.service.UserService;
 
 import java.util.ArrayList;
 
 @Controller
 @RequestMapping(value = "/game")
 public class GameController {
-//    @Autowired
-//    IUserService usersService;
 
     @Autowired
     UserRepository usersRepository;
@@ -60,21 +58,6 @@ public class GameController {
         usersList.add(addedUser);
 
         return new ResponseEntity<>(addedUser, HttpStatus.OK);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/login")
-    @ResponseBody
-    public ResponseEntity<User> login(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
-//        public ResponseEntity<User> login(@RequestBody LoginDto loginDto) {
-        User userLogged = usersList.stream()
-                .filter(user -> email.equals(user.getEmail()) && password.equals(user.getPassword()))
-                .findAny()
-                .orElse(null);
-
-        if(userLogged == null){
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(userLogged, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAllUserPokemons")
