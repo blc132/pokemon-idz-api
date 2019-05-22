@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.programirex.pokemonidzapi.entity.User;
-import pl.programirex.pokemonidzapi.repository.UsersRepository;
-//import pl.programirex.pokemonidzapi.service.UsersService;
+import pl.programirex.pokemonidzapi.repository.UserRepository;
+//import pl.programirex.pokemonidzapi.service.IUserService;
 
 import java.util.ArrayList;
 
@@ -16,10 +16,10 @@ import java.util.ArrayList;
 @RequestMapping(value = "/game")
 public class GameController {
 //    @Autowired
-//    UsersService usersService;
+//    IUserService usersService;
 
     @Autowired
-    UsersRepository usersRepository;
+    UserRepository usersRepository;
 
     ArrayList<User> usersList = new ArrayList<User>();
 

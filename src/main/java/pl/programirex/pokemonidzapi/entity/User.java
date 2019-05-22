@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Data
@@ -72,49 +73,13 @@ public class User {
         this.id = id;
     }
 
-    public User () {}
+    public User (String login, String password, String email, String firstName, String lastName) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return null;
-//    }
-//
-//    //@Override
-//    //public String getPassword() {
-//    //    return getPassword();
-//    //}
-//
-//    public String getId(){
-//        return id.toString();
-//    }
-//
-//    @Override
-//    public String getUsername() { return getLogin(); }
-//
-//    private String getLogin() {
-//        return this.login;
-//    }
-//
-//    //uproszczenie, nie robimy tego
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    //uproszczenie, nie robimy tego
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true ;
-//    }
-//
-//    //uproszczenie, nie robimy tego
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return true;
-//    }
+    public User () {}
 }
