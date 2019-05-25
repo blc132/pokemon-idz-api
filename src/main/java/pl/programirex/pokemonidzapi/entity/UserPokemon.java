@@ -19,4 +19,16 @@ public class UserPokemon {
     @JoinColumn
     private User user;
 
+    public void setPokeomonId(Long pokemonId) {
+        this.pokemonId = pokemonId;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public UserPokemon(Long pokemonId, User user) {
+        this.pokemonId = pokemonId;
+        this.user = user;
+    }
 }
