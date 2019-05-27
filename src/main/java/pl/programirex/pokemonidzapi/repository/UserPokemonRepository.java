@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserPokemonRepository extends JpaRepository<UserPokemon, Long> {
-    @Query("SELECT p FROM UserPokemon p where p.pokemon_id = :id")
+
+    @Query("SELECT p FROM UserPokemon p where p.pokemonId = :id")
     UserPokemon findPokeomonById(Long id);
 }

@@ -19,6 +19,8 @@ public class GameController {
 
     @Autowired
     private UserRepository usersRepository;
+
+    @Autowired
     private UserPokemonRepository pokemonRepository;
 
     public User findUserByLogin(String login) {
