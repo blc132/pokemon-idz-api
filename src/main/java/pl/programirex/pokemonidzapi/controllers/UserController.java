@@ -45,11 +45,4 @@ public class UserController {
         }
         return new ResponseEntity<>(logged, HttpStatus.OK);
     }
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/test")
-    public ResponseEntity<String> test()
-    {
-        return new ResponseEntity<>("XD", HttpStatus.OK);
-    }
 }
