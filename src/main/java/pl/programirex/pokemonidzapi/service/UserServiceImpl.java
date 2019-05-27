@@ -58,6 +58,11 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public User getById(Long userId) {
+       return usersRepository.findById(userId).stream().findFirst().orElse(null);
+    }
+
     private Date getCurrentDate()
     {
         return new java.sql.Timestamp(new java.util.Date().getTime());

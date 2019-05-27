@@ -27,6 +27,8 @@ public class UserPokemon {
         this.user = user;
     }
 
+    public UserPokemon(){}
+
     public UserPokemon(Long pokemonId, User user) {
         this.pokemonId = pokemonId;
         this.user = user;

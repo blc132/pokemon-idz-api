@@ -4,14 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import pl.programirex.pokemonidzapi.dto.RegisterDto;
+import pl.programirex.pokemonidzapi.dto.SavePokemonDto;
 import pl.programirex.pokemonidzapi.entity.User;
 import pl.programirex.pokemonidzapi.entity.UserPokemon;
 import pl.programirex.pokemonidzapi.repository.UserPokemonRepository;
 import pl.programirex.pokemonidzapi.repository.UserRepository;
+import pl.programirex.pokemonidzapi.service.GameService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/game")
@@ -21,7 +24,7 @@ public class GameController {
     private UserRepository usersRepository;
 
     @Autowired
-    private UserPokemonRepository pokemonRepository;
+    private GameService gameService;
 
     public User findUserByLogin(String login) {
         return usersRepository.findByLogin(login);
@@ -45,15 +48,17 @@ public class GameController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/getrand/{login}")
+    @RequestMapping(method = RequestMethod.POST, value = "/savePokemon")
     @ResponseBody
-    public ResponseEntity getRandomPokemon(@PathVariable("login") String login) {
-        if (findUserByLogin(login) != null) {
-            UserPokemon userPokemon = new UserPokemon(getRandomPokemonId(), findUserByLogin(login));
-            return new ResponseEntity<>("Dodano losowego pokemona", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Wystąpił błąd podczas dodawania losowego pokemona", HttpStatus.BAD_REQUEST);
+    public ResponseEntity savePokemon(@Valid @RequestBody SavePokemonDto savePokemonDto, BindingResult result) {
+        UserPokemon userPokemon = new UserPokemon();
+        if (!result.hasErrors()) {
+            userPokemon = gameService.savePokemon(savePokemonDto);
         }
+        if (userPokemon == null || userPokemon.getId() == null) {
+            return new ResponseEntity<>("Wystąpił błąd podczas zapisywania pokemona", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(userPokemon, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/fight")

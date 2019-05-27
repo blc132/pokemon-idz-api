@@ -10,5 +10,6 @@ public interface UserService {
     User saveUser(RegisterDto user);
     User login(LoginDto loginDto);
     List<User> getAll();
+    User getById(Long userId);
 }
 
