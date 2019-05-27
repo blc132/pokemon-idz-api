@@ -22,7 +22,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/register")
     @ResponseBody
-    public ResponseEntity register(@Valid UserDto accountDto, BindingResult result) {
+    public ResponseEntity register(@Valid @RequestBody UserDto accountDto, BindingResult result) {
         User registered = new User();
         if (!result.hasErrors()) {
             registered = userService.saveUser(accountDto);
