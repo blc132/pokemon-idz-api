@@ -35,7 +35,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     @ResponseBody
-    public ResponseEntity login(@Valid LoginDto loginDto, BindingResult result) {
+    public ResponseEntity login(@Valid @RequestBody LoginDto loginDto, BindingResult result) {
         User logged = new User();
         if (!result.hasErrors()) {
             logged = userService.login(loginDto);

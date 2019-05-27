@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         if(findUserByEmail(userDto.getEmail()) != null)
             return null;
 
-        User user = new User(userDto.getLogin(), BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt()), userDto.getEmail(), userDto.getFirstName(), userDto.getLastName());
+        User user = new User(userDto.getLogin(), BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt(8)), userDto.getEmail(), userDto.getFirstName(), userDto.getLastName());
         user.setDeleted(false);
         user.setDateOfTheLastDraw(getCurrentDate());
         user.setWins(0);
@@ -45,6 +45,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(LoginDto loginDto) {
         User user = usersRepository.findByLogin(loginDto.getLogin());
+        if(user == null)
+            return null;
         if(BCrypt.checkpw(loginDto.getPassword(), user.getPassword()))
             return user;
         return null;
