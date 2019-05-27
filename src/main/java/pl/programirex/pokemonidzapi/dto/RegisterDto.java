@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @PasswordMatches
-public class UserDto {
+public class RegisterDto {
 
     @NotNull
     @NotEmpty

@@ -1,6 +1,6 @@
 package pl.programirex.pokemonidzapi.validators.password;
 
-import pl.programirex.pokemonidzapi.dto.UserDto;
+import pl.programirex.pokemonidzapi.dto.RegisterDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,7 +13,7 @@ public class PasswordMatchesValidator
     }
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
-        UserDto user = (UserDto) obj;
+        RegisterDto user = (RegisterDto) obj;
         return user.getPassword().equals(user.getMatchingPassword());
     }
 }

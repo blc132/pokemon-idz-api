@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import pl.programirex.pokemonidzapi.dto.LoginDto;
-import pl.programirex.pokemonidzapi.dto.UserDto;
+import pl.programirex.pokemonidzapi.dto.RegisterDto;
 import pl.programirex.pokemonidzapi.entity.User;
 import pl.programirex.pokemonidzapi.repository.UserRepository;
-
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User saveUser(UserDto userDto){
+    public User saveUser(RegisterDto userDto){
         if(findUserByEmail(userDto.getEmail()) != null)
             return null;
 
@@ -50,6 +50,12 @@ public class UserServiceImpl implements UserService {
         if(BCrypt.checkpw(loginDto.getPassword(), user.getPassword()))
             return user;
         return null;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return usersRepository.findAll();
+
     }
 
     private Date getCurrentDate()
