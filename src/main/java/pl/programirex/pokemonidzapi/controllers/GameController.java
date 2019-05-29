@@ -48,7 +48,6 @@ public class GameController {
         return  new ResponseEntity<>(userTeam, HttpStatus.OK);
     }
 
-
     @RequestMapping(method = RequestMethod.POST, value = "/fight")
     @ResponseBody
     public String calculateFight(){

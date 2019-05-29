@@ -15,8 +15,6 @@ public class GetUserTeamDto {
         this.pokemonIds = pokemonIds;
     }
 
-
-
     @NotNull
     private String login;
 

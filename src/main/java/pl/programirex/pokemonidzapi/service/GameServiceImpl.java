@@ -13,6 +13,7 @@ import pl.programirex.pokemonidzapi.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -52,7 +53,7 @@ public class GameServiceImpl implements GameService {
         if(user == null)
             return null;
 
-        List<Long> pokemonIds = (List<Long>) userPokemonRepository.findUserPokemons(userId);
+        List<Long> pokemonIds = userPokemonRepository.findUserPokemons(userId);
 
         GetUserTeamDto userTeam =  new GetUserTeamDto(user.getLogin(), pokemonIds);
 

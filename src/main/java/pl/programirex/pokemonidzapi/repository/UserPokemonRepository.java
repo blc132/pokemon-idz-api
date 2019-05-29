@@ -16,5 +16,5 @@ public interface UserPokemonRepository extends JpaRepository<UserPokemon, Long> 
     UserPokemon findPokemonById(Long id);
 
     @Query("SELECT p.pokemonId FROM UserPokemon p where p.user.id = :userId")
-    UserPokemon findUserPokemons(Long userId);
+    List<Long> findUserPokemons(Long userId);
 }
