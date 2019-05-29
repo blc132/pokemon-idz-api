@@ -4,11 +4,15 @@ package pl.programirex.pokemonidzapi.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import pl.programirex.pokemonidzapi.dto.GetUserTeamDto;
 import pl.programirex.pokemonidzapi.dto.SavePokemonDto;
 import pl.programirex.pokemonidzapi.entity.User;
 import pl.programirex.pokemonidzapi.entity.UserPokemon;
 import pl.programirex.pokemonidzapi.repository.UserPokemonRepository;
 import pl.programirex.pokemonidzapi.repository.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -39,5 +43,19 @@ public class GameServiceImpl implements GameService {
             return null;
         }
         return userPokemon;
+    }
+
+    @Override
+    public GetUserTeamDto getUserTeam(Long userId) {
+        User user = userRepository.findById(userId).stream().findFirst().orElse(null);
+
+        if(user == null)
+            return null;
+
+        List<Long> pokemonIds = (List<Long>) userPokemonRepository.findUserPokemons(userId);
+
+        GetUserTeamDto userTeam =  new GetUserTeamDto(user.getLogin(), pokemonIds);
+
+        return userTeam;
     }
 }

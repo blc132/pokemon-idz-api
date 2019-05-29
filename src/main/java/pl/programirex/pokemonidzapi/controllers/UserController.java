@@ -72,6 +72,5 @@ public class UserController {
             return new ResponseEntity<>(userDto, HttpStatus.OK);
         }
         return  new ResponseEntity<>("Nie znaleziono użytkownika!", HttpStatus.BAD_REQUEST);
-
     }
 }
