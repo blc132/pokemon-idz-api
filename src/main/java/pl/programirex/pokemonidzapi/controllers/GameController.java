@@ -6,10 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.programirex.pokemonidzapi.dto.GetUserDto;
-import pl.programirex.pokemonidzapi.dto.GetUserTeamDto;
-import pl.programirex.pokemonidzapi.dto.RegisterDto;
-import pl.programirex.pokemonidzapi.dto.SavePokemonDto;
+import pl.programirex.pokemonidzapi.dto.*;
 import pl.programirex.pokemonidzapi.entity.User;
 import pl.programirex.pokemonidzapi.entity.UserPokemon;
 import pl.programirex.pokemonidzapi.repository.UserPokemonRepository;
@@ -36,6 +33,19 @@ public class GameController {
             return new ResponseEntity<>("Wystąpił błąd podczas zapisywania pokemona", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(userPokemon, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deletePokemon")
+    @ResponseBody
+    public ResponseEntity deletePokemon(@Valid @RequestBody DeletePokemonDto deletePokemonDto, BindingResult result) {
+        boolean serviceResult = false;
+        if (!result.hasErrors()) {
+            serviceResult = gameService.deletePokemon(deletePokemonDto);
+        }
+        if (serviceResult == false) {
+            return new ResponseEntity<>("Wystąpił błąd podczas usuwania pokemona", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getUserTeam/{userId}")

@@ -17,4 +17,7 @@ public interface UserPokemonRepository extends JpaRepository<UserPokemon, Long> 
 
     @Query("SELECT p.pokemonId FROM UserPokemon p where p.user.id = :userId")
     List<Long> findUserPokemons(Long userId);
+
+    @Query("SELECT p FROM UserPokemon p where p.user.id = :userId and p.pokemonId = :pokemonId")
+    List<UserPokemon> findUserPokemon(Long userId, Long pokemonId);
 }

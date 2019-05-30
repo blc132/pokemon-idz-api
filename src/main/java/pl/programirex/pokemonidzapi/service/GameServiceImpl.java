@@ -4,6 +4,7 @@ package pl.programirex.pokemonidzapi.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import pl.programirex.pokemonidzapi.dto.DeletePokemonDto;
 import pl.programirex.pokemonidzapi.dto.GetUserTeamDto;
 import pl.programirex.pokemonidzapi.dto.SavePokemonDto;
 import pl.programirex.pokemonidzapi.entity.User;
@@ -44,6 +45,28 @@ public class GameServiceImpl implements GameService {
             return null;
         }
         return userPokemon;
+    }
+
+    @Override
+    public boolean deletePokemon(DeletePokemonDto deletePokemonDto) {
+        if(deletePokemonDto.getPokemonId() == null || deletePokemonDto.getPokemonId() == 0 || deletePokemonDto.getUserId() == null || deletePokemonDto.getUserId() == 0)
+            return false;
+
+        User user  = userRepository.findById(deletePokemonDto.getUserId()).stream().findFirst().orElse(null);
+
+        if(user == null)
+            return false;
+
+        UserPokemon userPokemon = userPokemonRepository.findUserPokemon(user.getId(), deletePokemonDto.getPokemonId()).stream().findFirst().orElse(null);
+
+        try{
+            userPokemonRepository.delete(userPokemon);
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+        return true;
     }
 
     @Override
