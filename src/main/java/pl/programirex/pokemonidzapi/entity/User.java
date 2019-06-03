@@ -49,6 +49,9 @@ public class User {
     @Column(name = "pwd")
     private String password;
 
+    @Column(name = "main_pokemon_id")
+    private Long mainPokemonId;
+
     public User (String login, String password, String email) {
         this.login = login;
         this.password = password;
@@ -82,28 +85,4 @@ public class User {
     }
 
     public User () {}
-
-    public void setDateOfTheLastDraw(Date dateOfTheLastDraw) {
-        this.dateOfTheLastDraw = dateOfTheLastDraw;
-    }
-
-    public void setWins(int wins) {
-        this.wins = wins;
-    }
-
-    public void setLoses(int loses) {
-        this.loses = loses;
-    }
-
-    public void setDeleted(boolean is_deleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

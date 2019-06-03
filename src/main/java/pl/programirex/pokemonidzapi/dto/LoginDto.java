@@ -14,12 +14,4 @@ public class LoginDto {
     @NotNull
     @NotEmpty
     private String password;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
 }
