@@ -14,17 +14,18 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository usersRepository;
+    private UserRepository userRepository;
 
     @Override
     public User findUserByEmail(String email) {
-        return usersRepository.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
 
     @Override
     public User saveUser(RegisterDto userDto){
-        if(findUserByEmail(userDto.getEmail()) != null)
+        User userByLogin = userRepository.findByLogin(userDto.getLogin());
+        if(findUserByEmail(userDto.getEmail()) != null || userByLogin != null)
             return null;
 
         User user = new User(userDto.getLogin(), BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt(8)), userDto.getEmail(), userDto.getFirstName(), userDto.getLastName());
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
         user.setWins(0);
         user.setLoses(0);
         try{
-            usersRepository.save(user);
+            userRepository.save(user);
         }
         catch(Exception e)
         {
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(LoginDto loginDto) {
-        User user = usersRepository.findByLogin(loginDto.getLogin());
+        User user = userRepository.findByLogin(loginDto.getLogin());
         if(user == null)
             return null;
         if(BCrypt.checkpw(loginDto.getPassword(), user.getPassword()))
@@ -54,13 +55,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        return usersRepository.findAll();
+        return userRepository.findAll();
 
     }
 
     @Override
     public User getById(Long userId) {
-       return usersRepository.findById(userId).stream().findFirst().orElse(null);
+       return userRepository.findById(userId).stream().findFirst().orElse(null);
     }
 
     private Date getCurrentDate()
