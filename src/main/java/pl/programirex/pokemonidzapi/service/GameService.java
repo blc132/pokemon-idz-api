@@ -1,9 +1,6 @@
 package pl.programirex.pokemonidzapi.service;
 
-import pl.programirex.pokemonidzapi.dto.DeletePokemonDto;
-import pl.programirex.pokemonidzapi.dto.GetUserTeamDto;
-import pl.programirex.pokemonidzapi.dto.SaveBattleResultDto;
-import pl.programirex.pokemonidzapi.dto.SavePokemonDto;
+import pl.programirex.pokemonidzapi.dto.*;
 import pl.programirex.pokemonidzapi.entity.UserPokemon;
 
 public interface GameService {
@@ -13,4 +10,6 @@ public interface GameService {
     GetUserTeamDto getUserTeam(Long userId);
 
     boolean saveBattleResult(SaveBattleResultDto saveBattleResultDto);
+
+    boolean saveMainPokemon(SaveMainPokemonDto saveMainPokemonDto);
 }

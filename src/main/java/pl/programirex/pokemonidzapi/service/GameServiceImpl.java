@@ -4,10 +4,7 @@ package pl.programirex.pokemonidzapi.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import pl.programirex.pokemonidzapi.dto.DeletePokemonDto;
-import pl.programirex.pokemonidzapi.dto.GetUserTeamDto;
-import pl.programirex.pokemonidzapi.dto.SaveBattleResultDto;
-import pl.programirex.pokemonidzapi.dto.SavePokemonDto;
+import pl.programirex.pokemonidzapi.dto.*;
 import pl.programirex.pokemonidzapi.entity.User;
 import pl.programirex.pokemonidzapi.entity.UserPokemon;
 import pl.programirex.pokemonidzapi.repository.UserPokemonRepository;
@@ -75,7 +72,7 @@ public class GameServiceImpl implements GameService {
 
         List<Long> pokemonIds = userPokemonRepository.findUserPokemons(userId);
 
-        GetUserTeamDto userTeam = new GetUserTeamDto(user.getLogin(), pokemonIds);
+        GetUserTeamDto userTeam = new GetUserTeamDto(user.getLogin(), pokemonIds, user.getMainPokemonId());
 
         return userTeam;
     }
@@ -98,6 +95,24 @@ public class GameServiceImpl implements GameService {
             user.setLoses(loses);
         }
 
+        try {
+            userRepository.save(user);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean saveMainPokemon(SaveMainPokemonDto saveMainPokemonDto) {
+        if (saveMainPokemonDto.getUserId() == null || saveMainPokemonDto.getUserId() == 0 || saveMainPokemonDto.getMainPokemonId() == null|| saveMainPokemonDto.getMainPokemonId() == 0)
+            return false;
+
+        User user = userRepository.findById(saveMainPokemonDto.getUserId()).stream().findFirst().orElse(null);
+        if (user == null)
+            return false;
+
+        user.setMainPokemonId(saveMainPokemonDto.getMainPokemonId());
         try {
             userRepository.save(user);
         } catch (Exception e) {

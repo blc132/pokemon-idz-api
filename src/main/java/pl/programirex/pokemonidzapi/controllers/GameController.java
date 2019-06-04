@@ -58,6 +58,20 @@ public class GameController {
         return  new ResponseEntity<>(userTeam, HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/saveMainPokemon")
+    @ResponseBody
+    public ResponseEntity saveMainPokemon(@Valid @RequestBody SaveMainPokemonDto saveMainPokemonDto, BindingResult result)
+    {
+        boolean serviceResult = false;
+        if (!result.hasErrors()) {
+            serviceResult = gameService.saveMainPokemon(saveMainPokemonDto);
+        }
+        if (serviceResult == false) {
+            return new ResponseEntity<>("Wystąpił błąd podczas zapisywania głównego pokemona!", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/battle")
     @ResponseBody
     public ResponseEntity saveBattleResult(@Valid @RequestBody SaveBattleResultDto saveBattleResultDto, BindingResult result)
@@ -70,8 +84,6 @@ public class GameController {
             return new ResponseEntity<>("Wystąpił błąd podczas zapisywania wyniku walki!", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);
-
-
     }
 }
 
