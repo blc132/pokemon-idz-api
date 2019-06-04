@@ -57,6 +57,12 @@ public class GameServiceImpl implements GameService {
 
         try {
             userPokemonRepository.delete(userPokemon);
+
+            if(user.getMainPokemonId() == userPokemon.getPokemonId())
+            {
+                user.setMainPokemonId(null);
+                userRepository.save(user);
+            }
         } catch (Exception e) {
             return false;
         }
