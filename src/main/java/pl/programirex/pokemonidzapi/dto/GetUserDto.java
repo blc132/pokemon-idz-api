@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class GetUserDto {
 
-    public GetUserDto(Long id, String login, String firstName, String lastName, String email, int loses, int wins)   {
+    public GetUserDto(Long id, String login, String firstName, String lastName, String email, int wins, int loses)   {
         this.id = id;
         this.login = login;
         this.firstName = firstName;

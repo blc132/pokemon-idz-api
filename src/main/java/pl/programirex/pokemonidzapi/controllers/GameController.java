@@ -58,10 +58,20 @@ public class GameController {
         return  new ResponseEntity<>(userTeam, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/fight")
+    @RequestMapping(method = RequestMethod.POST, value = "/battle")
     @ResponseBody
-    public String calculateFight(){
-        return "todo";
+    public ResponseEntity saveBattleResult(@Valid @RequestBody SaveBattleResultDto saveBattleResultDto, BindingResult result)
+    {
+        boolean serviceResult = false;
+        if (!result.hasErrors()) {
+            serviceResult = gameService.saveBattleResult(saveBattleResultDto);
+        }
+        if (serviceResult == false) {
+            return new ResponseEntity<>("Wystąpił błąd podczas zapisywania wyniku walki!", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+
+
     }
 }
 
