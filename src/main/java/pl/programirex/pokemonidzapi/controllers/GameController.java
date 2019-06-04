@@ -6,12 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.programirex.pokemonidzapi.dto.*;
-import pl.programirex.pokemonidzapi.entity.User;
+import pl.programirex.pokemonidzapi.dto.game.*;
 import pl.programirex.pokemonidzapi.entity.UserPokemon;
-import pl.programirex.pokemonidzapi.repository.UserPokemonRepository;
-import pl.programirex.pokemonidzapi.repository.UserRepository;
-import pl.programirex.pokemonidzapi.service.GameService;
+import pl.programirex.pokemonidzapi.service.game.GameService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

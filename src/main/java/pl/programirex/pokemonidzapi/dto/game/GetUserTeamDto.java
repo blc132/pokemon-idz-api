@@ -1,4 +1,4 @@
-package pl.programirex.pokemonidzapi.dto;
+package pl.programirex.pokemonidzapi.dto.game;
 
 
 import lombok.Data;

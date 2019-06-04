@@ -1,6 +1,6 @@
-package pl.programirex.pokemonidzapi.service;
+package pl.programirex.pokemonidzapi.service.game;
 
-import pl.programirex.pokemonidzapi.dto.*;
+import pl.programirex.pokemonidzapi.dto.game.*;
 import pl.programirex.pokemonidzapi.entity.UserPokemon;
 
 public interface GameService {

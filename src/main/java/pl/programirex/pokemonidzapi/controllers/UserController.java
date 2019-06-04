@@ -6,11 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.programirex.pokemonidzapi.dto.GetUserDto;
-import pl.programirex.pokemonidzapi.dto.LoginDto;
-import pl.programirex.pokemonidzapi.dto.RegisterDto;
+import pl.programirex.pokemonidzapi.dto.user.GetUserDto;
+import pl.programirex.pokemonidzapi.dto.user.LoginDto;
+import pl.programirex.pokemonidzapi.dto.user.RegisterDto;
 import pl.programirex.pokemonidzapi.entity.User;
-import pl.programirex.pokemonidzapi.service.UserServiceImpl;
+import pl.programirex.pokemonidzapi.service.user.UserServiceImpl;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

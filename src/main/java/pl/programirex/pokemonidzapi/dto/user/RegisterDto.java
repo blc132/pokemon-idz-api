@@ -1,4 +1,4 @@
-package pl.programirex.pokemonidzapi.dto;
+package pl.programirex.pokemonidzapi.dto.user;
 
 import lombok.Data;
 import pl.programirex.pokemonidzapi.validators.email.ValidEmail;

@@ -1,6 +1,6 @@
 package pl.programirex.pokemonidzapi.validators.password;
 
-import pl.programirex.pokemonidzapi.dto.RegisterDto;
+import pl.programirex.pokemonidzapi.dto.user.RegisterDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

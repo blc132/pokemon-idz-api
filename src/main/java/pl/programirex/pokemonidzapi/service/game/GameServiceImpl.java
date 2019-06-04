@@ -1,18 +1,15 @@
-package pl.programirex.pokemonidzapi.service;
+package pl.programirex.pokemonidzapi.service.game;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import pl.programirex.pokemonidzapi.dto.*;
+import pl.programirex.pokemonidzapi.dto.game.*;
 import pl.programirex.pokemonidzapi.entity.User;
 import pl.programirex.pokemonidzapi.entity.UserPokemon;
 import pl.programirex.pokemonidzapi.repository.UserPokemonRepository;
 import pl.programirex.pokemonidzapi.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class GameServiceImpl implements GameService {

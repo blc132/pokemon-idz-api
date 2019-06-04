@@ -1,7 +1,7 @@
-package pl.programirex.pokemonidzapi.service;
+package pl.programirex.pokemonidzapi.service.user;
 
-import pl.programirex.pokemonidzapi.dto.LoginDto;
-import pl.programirex.pokemonidzapi.dto.RegisterDto;
+import pl.programirex.pokemonidzapi.dto.user.LoginDto;
+import pl.programirex.pokemonidzapi.dto.user.RegisterDto;
 import pl.programirex.pokemonidzapi.entity.User;
 import java.util.List;
 
