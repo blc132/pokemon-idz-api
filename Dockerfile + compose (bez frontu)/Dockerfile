@@ -1,0 +1,2 @@
+FROM maven:3.6-jdk-12
+EXPOSE 8080

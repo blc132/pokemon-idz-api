@@ -1,0 +1,31 @@
+version: "3.2"  
+services:
+  pokemon-idz-api:
+    build:
+      context: ./pokemon-idz-api
+    working_dir: /pokemon-idz-api
+    volumes:
+      - ./pokemon-idz-api:/pokemon-idz-api
+      - ~/.m2:/root/.m2
+      # instalacja ojdbc, bo nie ma go na mavenie przez licencje oracle
+    command: mvn install:install-file -Dfile=ojdbc14.jar -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar
+    command: mvn clean spring-boot:run
+    networks:
+      - main
+    ports:
+      - 8080:8080
+  # pokemon-idz-spa:
+  #   build:
+  #     context: ./pokemon-idz-spa
+  #   networks:
+  #     - main
+  #   depends_on:    
+  #     - pokemon-idz-api
+  #   volumes:
+  #     - ./pokemon-idz-spa:/pokemon-idz-spa
+  #     - /pokemon-idz-spa/node_modules
+  #   ports:
+  #     - 80:80
+  #   command: npm run start
+networks:
+  main:
